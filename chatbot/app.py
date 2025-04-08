@@ -7,34 +7,41 @@ from langchain.vectorstores import Chroma
 from langchain.embeddings import OllamaEmbeddings
 from langchain.chains import RetrievalQA
 
-# Load hostel data
-loader = TextLoader("../data/hostel_info.txt")
-documents = loader.load()
+# Avoid reloading everything on every run
+@st.cache_resource(show_spinner=False)
+def setup_chain():
+    # Path setup
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    FILE_PATH = os.path.join(BASE_DIR, "../data/hostel_info.txt")
 
-# Split text
-text_splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=50)
-docs = text_splitter.split_documents(documents)
+    # Load & split docs
+    loader = TextLoader(FILE_PATH)
+    documents = loader.load()
+    splitter = CharacterTextSplitter(chunk_size=400, chunk_overlap=20)
+    chunks = splitter.split_documents(documents)
 
-# Embed & store in vector DB
-embedding = OllamaEmbeddings(model="mistral")
-db = Chroma.from_documents(docs, embedding)
+    # Vector DB
+    embedding = OllamaEmbeddings(model="mistral")
+    vectordb = Chroma.from_documents(chunks, embedding)
 
-# Load LLM
-llm = Ollama(model="mistral")
+    # LLM + QA Chain
+    llm = Ollama(model="mistral")
+    qa_chain = RetrievalQA.from_chain_type(
+        llm=llm,
+        retriever=vectordb.as_retriever(search_kwargs={"k": 3}),
+        return_source_documents=False
+    )
+    return qa_chain
 
-# Retrieval-based QA chain
-qa = RetrievalQA.from_chain_type(
-    llm=llm,
-    retriever=db.as_retriever(),
-    return_source_documents=False
-)
+# UI
+st.set_page_config(page_title="Sunrise Hostel Bot", page_icon="🏠")
+st.title("🏠 Sunrise Hostel Q&A")
 
-# Streamlit UI
-st.title("🏠 Hostel Chatbot (Offline)")
-user_q = st.text_input("Ask me anything about the hostel:")
+query = st.text_input("Ask something about the hostel 🏫:")
 
-if user_q:
-    with st.spinner("Thinking..."):
-        response = qa.run(user_q)
-    st.markdown("**Answer:**")
+if query:
+    with st.spinner("Answering..."):
+        qa_chain = setup_chain()
+        response = qa_chain.run(query)
+    st.success("Done")
     st.write(response)

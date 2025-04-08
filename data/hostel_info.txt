@@ -1,18 +1,33 @@
 Hostel Name: Sunrise Boys Hostel
 
-🏠 General Information:
-- The hostel is located near XYZ University.
+General Information:
+
 - It has 3 floors, 90 rooms, and accommodates 180 students.
 - Each room is furnished with a bed, table, chair, cupboard, and fan.
 
-⏰ Mess Timings:
+location :The hostel is located near XYZ University.
+Address : XYZ University Colonelganj Allahabad.
+Address of the hostel : XYZ University Colonelganj Allahabad.
+
+Mess Timings:
 - Breakfast: 7:30 AM to 9:00 AM
 - Lunch: 12:30 PM to 2:00 PM
 - Dinner: 7:30 PM to 9:00 PM
 - Mess is closed on public holidays
+Price:
+
+Single Room: Rs 7000
+Double Room: Rs 6000
+Triple Room 5000
+
+Room available:
+Single room :4
+Double room :2
+Triple room :0
 
 📜 Hostel Rules:
-1. Hostel gate closes at 10:00 PM.
+1. Hostel gate closes at 10:00 PM.In time is 10:00 PM.
+
 2. Visitors are allowed from 4:00 PM to 7:00 PM (Only in the visitor's lounge).
 3. Loud music and parties are not permitted.
 4. Smoking and drinking are strictly prohibited.
@@ -36,7 +51,12 @@ Hostel Name: Sunrise Boys Hostel
 - Report any issue in the register kept near the warden's office
 - Urgent issues (water leak, electricity) can be reported via WhatsApp: +91-9876543210
 
-👨‍💼 Important Contacts:
+👨‍💼  Contact warden:
+- Warden: Mr. Rakesh Sharma, +91-9876543210
+- Hostel Office: hostel.admin@sunrisehostel.edu
+- Emergency: Security Gate - +91-9123456789
+
+    Contacts Details:
 - Warden: Mr. Rakesh Sharma, +91-9876543210
 - Hostel Office: hostel.admin@sunrisehostel.edu
 - Emergency: Security Gate - +91-9123456789
